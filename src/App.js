@@ -1,14 +1,18 @@
 import React, {useState} from "react";
 import "./App.css";
+import './constants/index'
+import Image from './image'
+
 
 function App() {
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-      </p>
+      <h1>NASA Photo of the Day</h1>
+        <Image/>
+
     </div>
+
+
   );
 }
 

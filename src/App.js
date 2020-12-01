@@ -1,33 +1,27 @@
 import React, {useState, useEffect} from "react";
-import { BASE_URL, API_KEY } from './constants/index'
-import "./App.css";
-import Image from './image'
+import "./App.css"
 import axios from 'axios'
-
+import CreateAPOD from './createAPOD'
 
 function App() {
-
-  // const { camera, close } = props
-  const [imageData, setImageData] = useState('')
-
+  const [ date, setDate ] = useState('')
+  const [ data, setData ] = useState([])
   useEffect(() => {
-    axios.get(`${BASE_URL}?api_key=${API_KEY}`)
-    .then(res => {
-        setImageData(res.data)})
-    .catch(err => {
-
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=O2nNqicMMW7DTS1PJl6bcVAVxgapiDutk34wwQO3&date=${date}`)
+    .then((apod) =>{
+      setData(apod.data)
     })
-    console.log(imageData)
-  },)
-  console.log(imageData)
-
+    .catch((err) => {
+      console.log('Invalid Date, error: ', err)
+      setDate('1999-03-18')
+      alert('Invalid date given, try again')
+    })
+  }, [date])
   return (
     <div className="App">
-      <h1>NASA Photo of the Day</h1>
-      <Image/>
+      <CreateAPOD data={ data }  setDate={setDate} />
     </div>
   );
-
 }
 
 export default App;
